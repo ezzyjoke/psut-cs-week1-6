@@ -1024,7 +1024,7 @@ html_template = '''<!DOCTYPE html>
     <a class="nav-link" id="nav-traps" onclick="switchTab('traps')">⚠️ 20 Fatal Traps <span class="nav-badge">Traps</span></a>
     <a class="nav-link" id="nav-flashcards" onclick="switchTab('flashcards')">🃏 41 Flashcards</a>
     <a class="nav-link" id="nav-mock-exam" onclick="switchTab('mock-exam')">📝 40-Q Mock Exam <span class="nav-badge">40 Qs</span></a>
-    <a class="nav-link" id="nav-lecture-bible" onclick="switchTab('lecture-bible')">📖 Lecture Bible (W1-W6)</a>
+    <a class="nav-link" id="nav-lecture-notes" onclick="switchTab('lecture-notes')">📖 Lecture Notes (W1-W6)</a>
   </aside>
 
   <!-- Main Content -->
@@ -1059,7 +1059,7 @@ html_template = '''<!DOCTYPE html>
       <button class="tab-btn" id="tabbtn-traps" onclick="switchTab('traps')">⚠️ 20 Traps</button>
       <button class="tab-btn" id="tabbtn-flashcards" onclick="switchTab('flashcards')">🃏 41 Cards</button>
       <button class="tab-btn" id="tabbtn-mock-exam" onclick="switchTab('mock-exam')">📝 40-Q Exam</button>
-      <button class="tab-btn" id="tabbtn-lecture-bible" onclick="switchTab('lecture-bible')">📖 Lecture Bible</button>
+      <button class="tab-btn" id="tabbtn-lecture-notes" onclick="switchTab('lecture-notes')">📖 Lecture Notes</button>
     </nav>
 
     <!-- ========================================================================= -->
@@ -1715,20 +1715,20 @@ main()</code></pre>
     </section>
 
     <!-- ========================================================================= -->
-    <!-- COMPREHENSIVE LECTURE BIBLE (WEEKS 1 TO 6) -->
+    <!-- COMPREHENSIVE LECTURE NOTES (WEEKS 1 TO 6) -->
     <!-- ========================================================================= -->
 
     </div>
-    <!-- Tab Pane: Lecture Bible (Weeks 1 to 6) -->
-    <div id="lecture-bible" class="tab-pane">
+    <!-- Tab Pane: Lecture Notes (Weeks 1 to 6) -->
+    <div id="lecture-notes" class="tab-pane">
       <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;">
-        <button class="pill-btn active" onclick="filterBibleWeek('all')">All Weeks</button>
-        <button class="pill-btn" onclick="filterBibleWeek('week1')">Week 1: Basics & Types</button>
-        <button class="pill-btn" onclick="filterBibleWeek('week2')">Week 2: Conditionals</button>
-        <button class="pill-btn" onclick="filterBibleWeek('week3')">Week 3: Loops & Scope</button>
-        <button class="pill-btn" onclick="filterBibleWeek('week4')">Week 4: Nested Loops</button>
-        <button class="pill-btn" onclick="filterBibleWeek('week5')">Week 5: Strings & Slicing</button>
-        <button class="pill-btn" onclick="filterBibleWeek('week6')">Week 6: Lists & Practice</button>
+        <button class="pill-btn active" onclick="filterNotesWeek('all')">All Weeks</button>
+        <button class="pill-btn" onclick="filterNotesWeek('week1')">Week 1: Basics & Types</button>
+        <button class="pill-btn" onclick="filterNotesWeek('week2')">Week 2: Conditionals</button>
+        <button class="pill-btn" onclick="filterNotesWeek('week3')">Week 3: Loops & Scope</button>
+        <button class="pill-btn" onclick="filterNotesWeek('week4')">Week 4: Nested Loops</button>
+        <button class="pill-btn" onclick="filterNotesWeek('week5')">Week 5: Strings & Slicing</button>
+        <button class="pill-btn" onclick="filterNotesWeek('week6')">Week 6: Lists & Practice</button>
       </div>
     <!-- Week 1 -->
     <section id="week1" class="bible-week">
@@ -2167,9 +2167,9 @@ def merge_lists(a, b):
         <span class="dock-icon">📝</span>
         <span>Quiz</span>
       </a>
-      <a class="dock-item" id="dock-lecture-bible" onclick="switchTab('lecture-bible')">
+      <a class="dock-item" id="dock-lecture-notes" onclick="switchTab('lecture-notes')">
         <span class="dock-icon">📖</span>
-        <span>Bible</span>
+        <span>Notes</span>
       </a>
     </nav>
 
@@ -2670,10 +2670,11 @@ def merge_lists(a, b):
       'traps',
       'flashcards',
       'mock-exam',
-      'lecture-bible'
+      'lecture-notes'
     ];
 
     function switchTab(tabId) {
+      if (tabId === 'lecture-bible') tabId = 'lecture-notes';
       if (!allTabIds.includes(tabId)) tabId = 'cram-sheet';
 
       // 1. Show only selected pane
@@ -2715,8 +2716,9 @@ def merge_lists(a, b):
       }
     }
 
-    function filterBibleWeek(weekId) {
-      document.querySelectorAll('#lecture-bible .pill-btn').forEach(btn => {
+    function filterBibleWeek(weekId) { return filterNotesWeek(weekId); }
+    function filterNotesWeek(weekId) {
+      document.querySelectorAll('#lecture-notes .pill-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('onclick').includes(weekId));
       });
 
