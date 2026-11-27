@@ -1062,11 +1062,9 @@ html_template = '''<!DOCTYPE html>
       <button class="tab-btn" id="tabbtn-lecture-bible" onclick="switchTab('lecture-bible')">📖 Lecture Bible</button>
     </nav>
 
-
     <!-- ========================================================================= -->
     <!-- MASTER FUNCTION DIRECTORY -->
     <!-- ========================================================================= -->
-    </div>
     <div id="functions-directory" class="tab-pane">
     <section>
       <div class="section-header">
@@ -1522,6 +1520,7 @@ html_template = '''<!DOCTYPE html>
         </table>
       </div>
     </section>
+    </div>
 
     <!-- ========================================================================= -->
     <!-- 1-HOUR EMERGENCY CRAM SHEET -->
@@ -2746,6 +2745,16 @@ def merge_lists(a, b):
       renderStack();
       renderFlashcards();
       renderQuiz();
+      setupCopyCodeButtons();
+      wrapTablesForMobile();
+
+      // Read hash from URL if present
+      const hash = window.location.hash.replace('#', '');
+      if (hash && allTabIds.includes(hash)) {
+        switchTab(hash);
+      } else {
+        switchTab('cram-sheet');
+      }
     };
   
     // --- Pro Copy Code Buttons ---
